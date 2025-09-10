@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Gerenciamento de Livros</title>
+</head>
+<body>
+    <h1>Cadastro de Livros</h1>
+
+    <form id="formLivro">
+        <input type="number" id="id" placeholder="ID" required>
+        <input type="text" id="titulo" placeholder="Título" required>
+        <input type="text" id="autor" placeholder="Autor" required>
+        <input type="number" id="ano" placeholder="Ano" required>
+        <input type="text" id="genero" placeholder="Gênero" required>
+        <input type="text" id="editora" placeholder="Editora" required>
+        <input type="number" id="numeroPaginas" placeholder="Número de Páginas" required>
+        <button type="submit">Salvar</button>
+    </form>
+
+    <h2>Lista de Livros</h2>
+    <ul id="listaLivros"></ul>
+
+    <script>
+        const apiUrl = "http://localhost:8082/livros";
+
+        async function carregarLivros() {
+            const resposta = await fetch(apiUrl);
+            const livros = await resposta.json();
+            const lista = document.getElementById("listaLivros");
+            lista.innerHTML = "";
+            livros.forEach(l => {
+                const li = document.createElement("li");
+                li.textContent = `${l.id} - ${l.titulo} (${l.autor}, ${l.ano})`;
+                lista.appendChild(li);
+            });
+        }
+
+        document.getElementById("formLivro").addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const livro = {
+                id: document.getElementById("id").value,
+                titulo: document.getElementById("titulo").value,
+                autor: document.getElementById("autor").value,
+                ano: document.getElementById("ano").value,
+                genero: document.getElementById("genero").value,
+                editora: document.getElementById("editora").value,
+                numeroPaginas: document.getElementById("numeroPaginas").value,
+            };
+
+            await fetch(apiUrl, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(livro),
+            });
+
+            carregarLivros();
+        });
+
+        carregarLivros();
+    </script>
+</body>
+</html>
