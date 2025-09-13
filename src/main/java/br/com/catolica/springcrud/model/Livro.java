@@ -1,4 +1,4 @@
-package br.com.catolica.springcrud.Model;
+package br.com.catolica.springcrud.model;
 
 public class Livro {
     private int id;

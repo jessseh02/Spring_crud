@@ -1,0 +1,15 @@
+CREATE TABLE IF NOT EXISTS categoria (
+id BIGINT AUTO_INCREMENT PRIMARY KEY,
+nome VARCHAR(100) NOT NULL,
+descricao VARCHAR(255)
+    );
+
+CREATE TABLE livro (
+id INT PRIMARY KEY AUTO_INCREMENT,
+titulo VARCHAR(255),
+autor VARCHAR(255),
+ano INT,
+genero VARCHAR(100),
+editora VARCHAR(100),
+numero_paginas INT
+);

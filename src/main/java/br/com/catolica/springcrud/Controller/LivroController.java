@@ -1,6 +1,6 @@
 package br.com.catolica.springcrud.Controller;
 
-import br.com.catolica.springcrud.Model.Livro;
+import br.com.catolica.springcrud.model.Livro;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -82,4 +82,5 @@ public class LivroController {
         if (removido) return "Livro removido com sucesso!";
         return "Erro: Livro não encontrado.";
     }
+
 }
